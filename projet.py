@@ -65,50 +65,82 @@ class Noeud:
         print(self.cle)
         if self.g:
             self.g.print_arbre()
-        
         if self.d:
             self.d.print_arbre()
 
     def remonte_elem(self):
-        #print(self.p.cle)
         if self.p is None:
-            #print("hello")
             self         
         else:
-            
-            #print(n.cle)
-            #print(self.cle)
             if self.cle<self.p.cle:
-                #print("salut")
                 tmp=self.cle
                 self.cle=self.p.cle
                 self.p.cle=tmp
-                #print(self.p.cle)
-                self.remonte_elem()
-            else:
-                #print("saluttttt")
-                self
+            self.p.remonte_elem()
 
-    def ajout_fin(self,cle):
+    def ajout(self,cle):
         if self.g is None or self.d is None :
             if self.g is None:
                 self.g = Noeud(self,None,None,cle)
-                #print("coucou")
-               # print(self.g.cle)
                 self.g.remonte_elem()
             else:
                 self.d = Noeud(self,None,None,cle)
                 self.d.remonte_elem()
-        else:   
-            self.g.ajout_fin(cle)
-           # self.d.ajout_fin(cle)
+        else:
+            self.g.ajout(cle)
+
+'''
+    def traverse(self,rootnode,cle):
+        thislevel = [rootnode]
+        while thislevel:
+            nextlevel = list()
+            for n in thislevel:
+               # print n.value,
+                if n.g: nextlevel.append(n.g)
+                if n.d: nextlevel.append(n.d)
+                else :
+                    if n.left is None: 
+                        self.g = Noeud(self,None,None,cle)
+                        self.g.remonte_elem()
+                    else: 
+                         self.d = Noeud(self,None,None,cle)
+                         self.d.remonte_elem()
+            print
+        thislevel = nextlevel
 
 
-    def ajout(self,cle):
-        self.ajout_fin(cle)
-        #self.remonte_elem(self.der())
-                    
-    
+def traverse3(a,rootnode,cle):
+        thislevel = [rootnode]
+        while thislevel:
+            nextlevel = list()
+            for n in thislevel:
+               # print n.value,
+                if n.g: nextlevel.append(n.g)
+                if n.d: nextlevel.append(n.d)
+                else :
+                    if n.left is None: 
+                        a.g = Noeud(a,None,None,cle)
+                        a.g.remonte_elem()
+                    else: 
+                         a.d = Noeud(a,None,None,cle)
+                         a.d.remonte_elem()
+            print
+        thislevel = nextlevel'''
+
+
+def traverse2(rootnode):
+  thislevel = [rootnode]
+  while thislevel:
+    nextlevel = list()
+    for n in thislevel:
+      print n.cle,
+      if n.g: nextlevel.append(n.g)
+      if n.d: nextlevel.append(n.d)
+    print
+    thislevel = nextlevel 
+
+
+
 def main():
     fic = "cles_alea/jeu_5_nb_cles_50000.txt"
     content = parse_file(fic)
@@ -121,14 +153,19 @@ def main():
     tas2=ConsIter([1,5,3,0,8,2])
     #print(tas2)
     
-    root = Noeud(None,None,None,6)
-    root.ajout_fin(7)
-    root.ajout_fin(3)
-    root.ajout_fin(12)
+    root = Noeud(None,None,None,7)
+    #root.traverse(,2)
+    root.ajout(19)
+    root.ajout(25)
+    root.ajout(100)
+    root.ajout(3)
+    root.ajout(1)
+    root.ajout(36)
+    root.ajout(17)
 
-    root.remonte_elem()
+    traverse2(root)
     
-    root.print_arbre()
+    #root.print_arbre()
     
     #root.remonte_elem(Noeud(3))
     
