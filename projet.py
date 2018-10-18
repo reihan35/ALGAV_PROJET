@@ -55,10 +55,10 @@ def union(tas1,tas2):
 
 class Noeud:
 
-    def __init__(self, cle): 
-        self.d = None
-        self.g = None
-        self.p = None
+    def __init__(self,p,g,d,cle): 
+        self.d = d
+        self.g = g
+        self.p = p
         self.cle = cle
 
     def print_arbre(self):
@@ -72,7 +72,7 @@ class Noeud:
             
     def ajout_fin(self,cle):
         if self.g is None :
-            self.g = Noeud(cle)
+            self.g = Noeud(self.p,self.g,self.d,cle)
 
         else:   
             self.g.ajout_fin(cle)
@@ -113,16 +113,16 @@ def main():
     tas2=ConsIter([1,5,3,0,8,2])
     #print(tas2)
     
-    root = Noeud(12)
+    root = Noeud(12,None,None,None)
     root.ajout_fin(6)
     root.ajout_fin(7)
     root.ajout_fin(3)
     
     root.print_arbre()
     
-    root.remonte_elem(Noeud(3))
+    #root.remonte_elem(Noeud(3))
     
-    root.print_arbre()
+    #root.print_arbre()
     #root.ajout(6)
     
 
