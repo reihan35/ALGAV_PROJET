@@ -62,40 +62,48 @@ class Noeud:
         self.cle = cle
 
     def print_arbre(self):
+        print(self.cle)
         if self.g:
             self.g.print_arbre()
         
-        print(self.cle)
-        
         if self.d:
             self.d.print_arbre()
-            
-    def ajout_fin(self,cle):
-        if self.g is None :
-            self.g = Noeud(self.p,self.g,self.d,cle)
 
+    def remonte_elem(self):
+        #print(self.p.cle)
+        if self.p is None:
+            #print("hello")
+            self         
+        else:
+            
+            #print(n.cle)
+            #print(self.cle)
+            if self.cle<self.p.cle:
+                #print("salut")
+                tmp=self.cle
+                self.cle=self.p.cle
+                self.p.cle=tmp
+                #print(self.p.cle)
+                self.remonte_elem()
+            else:
+                #print("saluttttt")
+                self
+
+    def ajout_fin(self,cle):
+        if self.g is None or self.d is None :
+            if self.g is None:
+                self.g = Noeud(self,None,None,cle)
+                #print("coucou")
+               # print(self.g.cle)
+                self.g.remonte_elem()
+            else:
+                self.d = Noeud(self,None,None,cle)
+                self.d.remonte_elem()
         else:   
             self.g.ajout_fin(cle)
-    
-    def der(self):
-        if self.g is None :
-             self
-        else:   
-            self.g.der()
-    
-        
-    def remonte_elem(self,n):
-        #if self.p is None:
-            self         
-        #else:
-            if self.p.cle<n.cle:
-                tmp=self.p.cle
-                n.cle=self.p.cle
-                self.p.cle=tmp
-                remonte_elem(self.p,n)
-            else:
-                self
-    
+           # self.d.ajout_fin(cle)
+
+
     def ajout(self,cle):
         self.ajout_fin(cle)
         #self.remonte_elem(self.der())
@@ -113,10 +121,12 @@ def main():
     tas2=ConsIter([1,5,3,0,8,2])
     #print(tas2)
     
-    root = Noeud(12,None,None,None)
-    root.ajout_fin(6)
+    root = Noeud(None,None,None,6)
     root.ajout_fin(7)
     root.ajout_fin(3)
+    root.ajout_fin(12)
+
+    root.remonte_elem()
     
     root.print_arbre()
     
