@@ -6,6 +6,8 @@ Created on Mon Oct 15 11:06:30 2018
 @author: 3522144
 """
 
+import math
+
 #parser un fichier de clef
 def parse_file (fic):    
     parsed = []
@@ -37,17 +39,59 @@ def supprmin(tas):
 def ajout(tas,elem):
     tas.append(elem)
     i=len(tas)-1
+    percolateUp(i, tas)
+
+def switch(a, b, tas):
+    tmp = tas[a]
+    tas[a] = tas[b]
+    tas[b] = tmp
+    
+def percolateUp(i, tas):
     while((i-1)/2 >= 0 and tas[(i-1)/2]>tas[i]):
-        tmp=tas[(i-1)/2]
-        tas[(i-1)/2]=tas[i]
-        tas[i]=tmp
+        switch(i, (i-1)/2, tas)
         i=(i-1)/2
-        
+
+def percolateDown(pere, tas, cpt):
+    while 2*pere+1 < len(tas):
+        cpt = cpt +1
+        #recuperer le fils minimum
+        f_g = 2*pere+1
+        f_d = 2*pere+2
+
+        f_min = min(tas[f_g], tas[f_d])
+        if(tas[pere] <  f_min):
+            break
+        #on fait descendre le pere a gauche
+        if tas[f_g] < tas[f_d]:
+            switch(f_g, pere, tas)
+            pere = f_g
+        #a droite
+        else:
+            switch(f_d, pere, tas)
+            pere = f_d
+    return cpt
+    
+int(2.6)
 def ConsIter(l):
-    tas = []
-    while(l!=[]):
-        ajout(tas,l.pop())
+    tas = list(l)
+    n = len(l)
+    h = int(math.log(n, 2)) - 1
+    i = int(pow(2, h)-1)
+    nxt_lvl = 2*i+1
+    cpt = 0
+    while h >= 0:
+        print h
+        #parcours d'un niveau
+        while (i < nxt_lvl):
+            cpt = percolateDown(i, tas, cpt)
+            i = i+1
+        h = h - 1
+        i = int(pow(2, h)-1)
+        nxt_lvl = 2*i+1
+    print cpt
     return tas
+
+print ConsIter([9, 8, 7, 6, 5, 4, 3])
 
 def union(tas1,tas2):
     l = tas1 +  tas2 
@@ -175,4 +219,4 @@ def main():
 
     #root.print_arbre()
     
-main()
+#main()
