@@ -34,24 +34,38 @@ class Noeud:
                 self.cle=self.p.cle
                 self.p.cle=tmp
                 self.p.remonte_elem()
-                
+    
+    def switchG(self):
+        tmp = self.cle
+        self.cle = self.g.cle
+        self.g.cle = tmp
+    
+    def switchD(self):
+        tmp = self.cle
+        self.cle = self.d.cle
+        self.d.cle = tmp
+        
     def descendre_elem(self):
-        if self.g and self.d is None:
-            self         
-        else:  
-            if self.g.cle < self.d.cle:
-                if self.g.cle < self.cle:
-                    tmp=self.cle
-                    self.cle=self.g.cle
-                    self.g.cle=tmp
-                    self.g.descendre_elem()
+        print ("je fais descendre" + str(self.cle))
+        if not (self.g is None):
+            if not (self.d is None):
+                if self.g.cle > self.d.cle:
+                    if self.d.cle < self.cle:
+                        self.switchD()
+                        self.d.descendre_elem()
             else:
-                if self.d.cle < self.cle:
-                    tmp=self.cle
-                    self.cle=self.d.cle
-                    self.d.cle=tmp
-                    self.d.descendre_elem()
+                if self.g.cle < self.cle:
+                    self.switchG()
+                    self.g.descendre_elem()
 
+    def make_tas(self):
+        if self.g != None:
+            self.g.make_tas()
+            if self.d != None:    
+                self.d.make_tas()
+            print (self.cle)
+            print(self.g.cle)
+            self.descendre_elem()
              
                         
                     
@@ -60,7 +74,12 @@ class Arbre:
                 
     def __init__(self):
         self.rac = None
-        self.nb_nds = 0;   
+        self.nb_nds = 0;
+        
+    def make_tas_a(self,l):
+        self.constr_arbre(l)
+        self.rac.make_tas()
+        
     def ajout(self, cle):
         self.nb_nds = self.nb_nds + 1
         pere = self.rac
@@ -90,7 +109,25 @@ class Arbre:
                 pere.d = Noeud(pere, None, None, cle)
                 pere.d.remonte_elem()
                 self.lastAjout = pere.d
-                
+    
+    def constr_arbre(self, l):
+        n = len(l)
+        self.nb_nds = n
+        self.rac = self.constr_arbre_rec(None, l, 0, n)
+    
+    def constr_arbre_rec (self, pere, l, i, n):
+        rac = Noeud(pere, None, None, l[i])
+        if 2*i+1 >= n:
+            rac.g = None
+        else:
+            rac.g = self.constr_arbre_rec(rac, l, 2*i+1, n)
+            
+            if 2*i+2 >= n:
+                rac.d = None
+            else:
+                rac.d = self.constr_arbre_rec(rac, l, 2*i+2, n)
+        return rac
+        
 
     def print_arbre(self):
         print(self.rac)
@@ -129,9 +166,13 @@ class Arbre:
          
 
 
-    
 
-'''
+a = Arbre()
+#a.constr_arbre([5, 4, 3, 2, 1])
+a.make_tas_a([5, 4, 3, 2, 1])
+a.print_arbre()
+
+"""
     def traverse(self,rootnode,cle):
         thislevel = [rootnode]
         while thislevel:
@@ -167,10 +208,32 @@ def traverse3(a,rootnode,cle):
                          a.d = Noeud(a,None,None,cle)
                          a.d.remonte_elem()
             print
-        thislevel = nextlevel'''
+        thislevel = nextlevel
+
+    def descendre_elem(self):
+        print ("a")
+        if not (self.g is None):
+            if not (self.d is None):
+                if self.g.cle > self.d.cle:
+                    if self.d.cle < self.cle:
+                        self.switch(self.d.cle, self.cle)
+                        
+                        tmp=self.cle
+                        self.cle=self.d.cle
+                        self.d.cle=tmp
+                        
+                        self.d.descendre_elem()
+            else:
+                if self.g.cle < self.cle:
+                    self.switch(self.g.cle, self.cle)
+
+                        tmp=self.cle
+                        self.cle=self.g.cle
+                        self.g.cle=tmp
+
+                    self.g.descendre_elem()
 
 
-"""
 def traverse2(rootnode):
   thislevel = [root2(rootnode):
   thislevel = [rootnode]
@@ -243,4 +306,4 @@ def main():
     a.print_arbre()
     print ("salut")
     
-main()
+#main()
