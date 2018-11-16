@@ -26,15 +26,9 @@ def eg (c1, c2):
 
 
 def supprmin(tas):
-    i=0
-    while(2*i+1<len(tas)):
-        print("val i :" + str(i))
-        tas[i]=min(tas[2*i+1],tas[2*i+2])
-        if(tas[i]==tas[2*i+1]):
-            i=2*i+1
-        else:
-            i=2*i+2
-    del tas[i]
+    tas[0] = tas[len(tas-1)]
+    del tas[len(tas-1)]
+    percolateDown(0, tas);
     
 def ajout(tas,elem):
     tas.append(elem)
@@ -95,5 +89,5 @@ def ConsIter(l):
     print (cpt)
     return tas
 
-#print ConsIter([9, 8, 7, 6, 5, 4, 3])
+print (ConsIter([9, 8, 7, 6, 5, 4, 3]))
 

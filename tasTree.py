@@ -35,36 +35,35 @@ class Noeud:
                 self.p.cle=tmp
                 self.p.remonte_elem()
     
+    #Echange un noeud avec son fils gauche
     def switchG(self):
         tmp = self.cle
         self.cle = self.g.cle
         self.g.cle = tmp
     
+    #Echange un noeud avec son fils droit
     def switchD(self):
         tmp = self.cle
         self.cle = self.d.cle
         self.d.cle = tmp
         
     def descendre_elem(self):
-        print ("je fais descendre" + str(self.cle))
         if not (self.g is None):
             if not (self.d is None):
+                
                 if self.g.cle > self.d.cle:
                     if self.d.cle < self.cle:
                         self.switchD()
                         self.d.descendre_elem()
-            else:
-                if self.g.cle < self.cle:
-                    self.switchG()
-                    self.g.descendre_elem()
+            if self.g.cle < self.cle:
+                self.switchG()
+                self.g.descendre_elem()
 
     def make_tas(self):
         if self.g != None:
             self.g.make_tas()
             if self.d != None:    
                 self.d.make_tas()
-            print (self.cle)
-            print(self.g.cle)
             self.descendre_elem()
              
                         
@@ -149,13 +148,19 @@ class Arbre:
                 pere = pere.d
         
         b = bits.popleft()
+        
+        #cas où le tas contient un unique element
         if b == []:
             del pere
             return
+        
+        #nombre pair d'elements: le dernier element est donc un fils gauche
         if b == '0':
             cle = pere.g.cle
             del pere.g
             pere.g = None
+            
+        #nb impair: le dernier element est un fils droit
         else:
             cle = pere.d.cle
             del pere.d
@@ -172,6 +177,9 @@ a = Arbre()
 a.make_tas_a([5, 4, 3, 2, 1])
 a.print_arbre()
 
+print("cc")
+a.supprmin()
+a.print_arbre()
 """
     def traverse(self,rootnode,cle):
         thislevel = [rootnode]
