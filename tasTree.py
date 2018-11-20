@@ -5,7 +5,7 @@ Created on Wed Oct 24 10:52:41 2018
 
 @author: 3535008
 """
-
+import time
 from collections import deque
 
 class Noeud:
@@ -172,14 +172,14 @@ class Arbre:
 
 
 
-a = Arbre()
+#a = Arbre()
 #a.constr_arbre([5, 4, 3, 2, 1])
-a.make_tas_a([5, 4, 3, 2, 1])
-a.print_arbre()
+#a.make_tas_a([5, 4, 3, 2, 1])
+#a.print_arbre()
 
-print("cc")
-a.supprmin()
-a.print_arbre()
+#print("cc")
+#a.supprmin()
+#a.print_arbre()
 """
     def traverse(self,rootnode,cle):
         thislevel = [rootnode]
@@ -306,12 +306,63 @@ def main():
     #root.print_arbre()
 """
 
-def main():
-    a = Arbre()
-    aj_succ([9, 8, 7, 6, 5, 4, 3, 2, 1], a)
+
+l1=['cles_alea/jeu_1_nb_cles_100.txt','cles_alea/jeu_2_nb_cles_100.txt','cles_alea/jeu_3_nb_cles_100.txt','cles_alea/jeu_4_nb_cles_100.txt','cles_alea/jeu_5_nb_cles_100.txt']
+
+l2=['cles_alea/jeu_1_nb_cles_200.txt','cles_alea/jeu_2_nb_cles_200.txt','cles_alea/jeu_3_nb_cles_200.txt','cles_alea/jeu_4_nb_cles_200.txt','cles_alea/jeu_5_nb_cles_200.txt']
+
+l3=['cles_alea/jeu_1_nb_cles_500.txt','cles_alea/jeu_2_nb_cles_500.txt','cles_alea/jeu_3_nb_cles_500.txt','cles_alea/jeu_4_nb_cles_500.txt','cles_alea/jeu_5_nb_cles_500.txt']
+
+l4=['cles_alea/jeu_1_nb_cles_1000.txt','cles_alea/jeu_2_nb_cles_1000.txt','cles_alea/jeu_3_nb_cles_1000.txt','cles_alea/jeu_4_nb_cles_1000.txt','cles_alea/jeu_5_nb_cles_1000.txt']
+
+
+l5=['cles_alea/jeu_1_nb_cles_5000.txt','cles_alea/jeu_2_nb_cles_5000.txt','cles_alea/jeu_3_nb_cles_5000.txt','cles_alea/jeu_4_nb_cles_5000.txt','cles_alea/jeu_5_nb_cles_5000.txt']
+
+l6=['cles_alea/jeu_1_nb_cles_10000.txt','cles_alea/jeu_2_nb_cles_10000.txt','cles_alea/jeu_3_nb_cles_10000.txt','cles_alea/jeu_4_nb_cles_10000.txt','cles_alea/jeu_5_nb_cles_10000.txt']
+
+l7=['cles_alea/jeu_1_nb_cles_20000.txt','cles_alea/jeu_2_nb_cles_20000.txt','cles_alea/jeu_3_nb_cles_20000.txt','cles_alea/jeu_4_nb_cles_20000.txt','cles_alea/jeu_5_nb_cles_20000.txt']
+
+l8=['cles_alea/jeu_1_nb_cles_50000.txt','cles_alea/jeu_2_nb_cles_50000.txt','cles_alea/jeu_3_nb_cles_50000.txt','cles_alea/jeu_4_nb_cles_50000.txt','cles_alea/jeu_5_nb_cles_50000.txt']
+
+
+lt = [l1,l2,l3,l4,l5,l6,l7,l8]
+
+t_m = 0
+cpt = 1
+
+#a.constr_arbre([5, 4, 3, 2, 1])
+#a.make_tas_a([5, 4, 3, 2, 1])
+
+
+def parse_file (fic):    
+    parsed = []
+    fic1=open(fic,'r')
+    for line in fic1:
+        parsed.append(int(line, 16))
+    return parsed
+
+
+for l in lt:
+	for i in l:
+		start_time = time.time()
+		a = Arbre()
+		a.make_tas_a(parse_file(i))
+		t_m = t_m + (time.time() - start_time)
+	file = open("tas_arbre" + str(cpt) + ".txt","w") 
+	file.write(str(t_m/5))
+	file.close
+	cpt = cpt + 1
+
+
+
+#def main():
+   # a = Arbre()
+   # aj_succ([9, 8, 7, 6, 5, 4, 3, 2, 1], a)
     
-    a.supprmin()
-    a.print_arbre()
-    print ("salut")
+   # a.supprmin()
+   # a.print_arbre()
+   # print ("salut")
+
+
     
 #main()

@@ -5,7 +5,9 @@ Created on Fri Nov 16 14:18:43 2018
 
 @author: 3535008
 """
+import time
 from collections import deque
+
 #une file binomiale est juste une liste (on utilisera un deque) de tournois
 
 class Tournoi:
@@ -124,3 +126,46 @@ def SupprMin(F):
 f = ConsIter([1, 2, 3, 4, 5, 6])
 print (Degre(f[0]))
 print(Degre(f[1]))
+
+
+
+def parse_file (fic):    
+    parsed = []
+    fic1=open(fic,'r')
+    for line in fic1:
+        parsed.append(int(line, 16))
+    return parsed
+
+l1=['cles_alea/jeu_1_nb_cles_100.txt','cles_alea/jeu_2_nb_cles_100.txt','cles_alea/jeu_3_nb_cles_100.txt','cles_alea/jeu_4_nb_cles_100.txt','cles_alea/jeu_5_nb_cles_100.txt']
+
+l2=['cles_alea/jeu_1_nb_cles_200.txt','cles_alea/jeu_2_nb_cles_200.txt','cles_alea/jeu_3_nb_cles_200.txt','cles_alea/jeu_4_nb_cles_200.txt','cles_alea/jeu_5_nb_cles_200.txt']
+
+l3=['cles_alea/jeu_1_nb_cles_500.txt','cles_alea/jeu_2_nb_cles_500.txt','cles_alea/jeu_3_nb_cles_500.txt','cles_alea/jeu_4_nb_cles_500.txt','cles_alea/jeu_5_nb_cles_500.txt']
+
+l4=['cles_alea/jeu_1_nb_cles_1000.txt','cles_alea/jeu_2_nb_cles_1000.txt','cles_alea/jeu_3_nb_cles_1000.txt','cles_alea/jeu_4_nb_cles_1000.txt','cles_alea/jeu_5_nb_cles_1000.txt']
+
+
+l5=['cles_alea/jeu_1_nb_cles_5000.txt','cles_alea/jeu_2_nb_cles_5000.txt','cles_alea/jeu_3_nb_cles_5000.txt','cles_alea/jeu_4_nb_cles_5000.txt','cles_alea/jeu_5_nb_cles_5000.txt']
+
+l6=['cles_alea/jeu_1_nb_cles_10000.txt','cles_alea/jeu_2_nb_cles_10000.txt','cles_alea/jeu_3_nb_cles_10000.txt','cles_alea/jeu_4_nb_cles_10000.txt','cles_alea/jeu_5_nb_cles_10000.txt']
+
+l7=['cles_alea/jeu_1_nb_cles_20000.txt','cles_alea/jeu_2_nb_cles_20000.txt','cles_alea/jeu_3_nb_cles_20000.txt','cles_alea/jeu_4_nb_cles_20000.txt','cles_alea/jeu_5_nb_cles_20000.txt']
+
+l8=['cles_alea/jeu_1_nb_cles_50000.txt','cles_alea/jeu_2_nb_cles_50000.txt','cles_alea/jeu_3_nb_cles_50000.txt','cles_alea/jeu_4_nb_cles_50000.txt','cles_alea/jeu_5_nb_cles_50000.txt']
+
+lt = [l1,l2,l3,l4,l5,l6,l7,l8]
+
+t_m = 0
+cpt = 1
+
+for l in lt:
+	for i in l:
+		start_time = time.time()
+		ConsIter(parse_file(i))
+		t_m = t_m + (time.time() - start_time)
+	file = open("file_const" + str(cpt) + ".txt","w") 
+	file.write(str(t_m/5))
+	file.close
+	cpt = cpt + 1
+
+

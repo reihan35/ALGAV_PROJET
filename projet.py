@@ -7,6 +7,7 @@ Created on Mon Oct 15 11:06:30 2018
 """
 
 import math
+import time
 
 #parser un fichier de clef
 def parse_file (fic):    
@@ -78,7 +79,7 @@ def ConsIter(l):
     nxt_lvl = 2*i+1
     cpt = 0
     while h >= 0:
-        print(h)
+        #print(h)
         #parcours d'un niveau
         while (i < nxt_lvl):
             cpt = percolateDown(i, tas)
@@ -86,8 +87,39 @@ def ConsIter(l):
         h = h - 1
         i = int(pow(2, h)-1)
         nxt_lvl = 2*i+1
-    print (cpt)
+    #print (cpt)
     return tas
 
-print (ConsIter([9, 8, 7, 6, 5, 4, 3]))
+
+l1=['cles_alea/jeu_1_nb_cles_100.txt','cles_alea/jeu_2_nb_cles_100.txt','cles_alea/jeu_3_nb_cles_100.txt','cles_alea/jeu_4_nb_cles_100.txt','cles_alea/jeu_5_nb_cles_100.txt']
+
+l2=['cles_alea/jeu_1_nb_cles_200.txt','cles_alea/jeu_2_nb_cles_200.txt','cles_alea/jeu_3_nb_cles_200.txt','cles_alea/jeu_4_nb_cles_200.txt','cles_alea/jeu_5_nb_cles_200.txt']
+
+l3=['cles_alea/jeu_1_nb_cles_500.txt','cles_alea/jeu_2_nb_cles_500.txt','cles_alea/jeu_3_nb_cles_500.txt','cles_alea/jeu_4_nb_cles_500.txt','cles_alea/jeu_5_nb_cles_500.txt']
+
+l4=['cles_alea/jeu_1_nb_cles_1000.txt','cles_alea/jeu_2_nb_cles_1000.txt','cles_alea/jeu_3_nb_cles_1000.txt','cles_alea/jeu_4_nb_cles_1000.txt','cles_alea/jeu_5_nb_cles_1000.txt']
+
+
+l5=['cles_alea/jeu_1_nb_cles_5000.txt','cles_alea/jeu_2_nb_cles_5000.txt','cles_alea/jeu_3_nb_cles_5000.txt','cles_alea/jeu_4_nb_cles_5000.txt','cles_alea/jeu_5_nb_cles_5000.txt']
+
+l6=['cles_alea/jeu_1_nb_cles_10000.txt','cles_alea/jeu_2_nb_cles_10000.txt','cles_alea/jeu_3_nb_cles_10000.txt','cles_alea/jeu_4_nb_cles_10000.txt','cles_alea/jeu_5_nb_cles_10000.txt']
+
+l7=['cles_alea/jeu_1_nb_cles_20000.txt','cles_alea/jeu_2_nb_cles_20000.txt','cles_alea/jeu_3_nb_cles_20000.txt','cles_alea/jeu_4_nb_cles_20000.txt','cles_alea/jeu_5_nb_cles_20000.txt']
+
+l8=['cles_alea/jeu_1_nb_cles_50000.txt','cles_alea/jeu_2_nb_cles_50000.txt','cles_alea/jeu_3_nb_cles_50000.txt','cles_alea/jeu_4_nb_cles_50000.txt','cles_alea/jeu_5_nb_cles_50000.txt']
+
+lt = [l1,l2,l3,l4,l5,l6,l7,l8]
+
+t_m = 0
+cpt = 1
+
+for l in lt:
+	for i in l:
+		start_time = time.time()
+		ConsIter(parse_file(i))
+		t_m = t_m + (time.time() - start_time)
+	file = open("tas_tab" + str(cpt) + ".txt","w") 
+	file.write(str(t_m/5))
+	file.close
+	cpt = cpt + 1
 
