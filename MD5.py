@@ -8,6 +8,14 @@ Created on Mon Nov 26 11:30:32 2018
 import math
 import binascii
 
+
+# Rotate left: 0b1001 --> 0b0011
+def left_rotate (val, r_bits, max_bits):
+    return (val << r_bits%max_bits) & (2**max_bits-1) | ((val & (2**max_bits-1)) >> (max_bits-(r_bits%max_bits)))
+
+
+add = 2**32
+
 def MD5(m):
     entier = []
     k = []
@@ -25,35 +33,39 @@ def MD5(m):
     h2 = 0x98BADCFE
     h3 = 0x10325476
     
-    m = list(' '.join(format(ord(x), 'b') for x in m))
+    #On convertit le message en nombre binaire
+    m = list(''.join(format(ord(x), 'b') for x in m))
     #Taille du message
+    print (m)
     n = len(m)
-    print m
     m.append('1')
-    print m
+    print (n)
     
     i = (n+1) %512
     while i != 448:
         m.append('0')
         i = (i + 1)%512
     
+    print (len(m))
+    
     
     #attention, little endian a check?
     n_bin = list(format(n, '064b'))
     n_bin.reverse()
-    print(n_bin)
+    #print(n_bin)
     m = m + list(n_bin)
-    print (m)
+    #print (m)
     
-    
-    nb_iter = m/512
+    #print (len(m))
+    nb_iter = int(len(m)/512)
     #On decoupe en blocs de 512
     for b in range (nb_iter):
+        print("salut")
         bloc = m[b*512:(b+1)*512]
         w = []
         #On decoupe en 16 mots de 32 bits
         for i in range (16):
-            w.append(m[i:(i+1)*16])
+            w.append(bloc[i*16:(i+1)*16])
         
         a = h0
         b = h1
@@ -63,6 +75,7 @@ def MD5(m):
         for i in range(64):
             if i <= 15:
                 f = (b & c) | ((~b) & d)
+                g = i
             elif i <= 31:
                 f = (d & b) | ((~d) & c)
                 g = (5*i + 1) %16 
@@ -76,16 +89,34 @@ def MD5(m):
             tmp = d
             d = c
             c = b
-            b = ((a + f + k[i] + w[g]) << r[i]) + b
+            """
+            print "wf = "
+            print w[g]
+            """
+            w_g = int("".join(w[g]))
+            #print ("g = " + str(g) + " " + str(w_g))
+            #c'est sans doute ici que ca foire, dans les 3 lignes suivantes
+            #p-e pad et rajouter des 0 si le nombre n'atteint pas 32 bits?
+            tmp2 =  (a + f + int(k[i]) + w_g) %add
+            print(len(bin(tmp2))-2)
+            b = (left_rotate(tmp2, r[i], 32) + b) % add
             a = tmp
         
-        h0 = h0 +a
-        h1 = h1 + b
-        h2 = h2 + c
-        h3 = h3 + d
+        h0 = (h0 + a) %add
+        h1 = (h1 + b) %add
+        h2 = (h2 + c) %add
+        h3 = (h3 + d) %add
+    
+    hashed = hex(h0 + h1 + h2 + h3)
+    print (hashed)
+    print (str(hex(h0))+ '\n' + str(hex(h1))+'\n' + str(hex(h2))+ '\n' + str(hex(h3)) )
         
 
     
 
 
-MD5("salut")
+print (len ("d6aa97d33d459ea3670056e737c99a3d"))
+MD5("Wikipedia, l'encyclopedie libre et gratuite")
+
+
+print(len(bin(2)))
