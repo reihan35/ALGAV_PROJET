@@ -17,16 +17,16 @@ def left_rotate (val, r_bits, max_bits):
 add = 2**32
 
 def MD5(m):
-    entier = []
     k = []
-    r = [7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22]
+    r = []
+    r[0:15] = [7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22,  7, 12, 17, 22]
     r[16:31] = [5,  9, 14, 20,  5,  9, 14, 20,  5,  9, 14, 20,  5,  9, 14, 20]
     r[32:47] = [4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23,  4, 11, 16, 23]
     r[48:63] = [6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21,  6, 10, 15, 21]
     print(r)
     
     for i in range(64):
-        k.append(math.floor(abs(math.sin(i+1)) * 2**32))
+        k.append(int(math.floor(abs(math.sin(i+1)) * 2**32)))
 
     h0 = 0x67452301
     h1 = 0xEFCDAB89
@@ -55,18 +55,21 @@ def MD5(m):
     #print(n_bin)
     m = m + list(n_bin)
     #print (m)
-    
+
     #print (len(m))
     nb_iter = int(len(m)/512)
     #On decoupe en blocs de 512
     for b in range (nb_iter):
         print("salut")
         bloc = m[b*512:(b+1)*512]
+        
+        print bloc
         w = []
         #On decoupe en 16 mots de 32 bits
         for i in range (16):
-            w.append(bloc[i*16:(i+1)*16])
-        
+            w.append(bloc[i*32:(i+1)*32])
+            print i
+            print w[i]
         a = h0
         b = h1
         c = h2
@@ -91,13 +94,13 @@ def MD5(m):
             c = b
             """
             print "wf = "
-            print w[g]
             """
-            w_g = int("".join(w[g]))
+            #print w[g]
+            w_g = int("".join(w[g]), 2)
             #print ("g = " + str(g) + " " + str(w_g))
             #c'est sans doute ici que ca foire, dans les 3 lignes suivantes
             #p-e pad et rajouter des 0 si le nombre n'atteint pas 32 bits?
-            tmp2 =  (a + f + int(k[i]) + w_g) %add
+            tmp2 =  (a + f + k[i] + w_g) %add
             print(len(bin(tmp2))-2)
             b = (left_rotate(tmp2, r[i], 32) + b) % add
             a = tmp
@@ -108,11 +111,14 @@ def MD5(m):
         h3 = (h3 + d) %add
     
     hashed = hex(h0 + h1 + h2 + h3)
-    print (hashed)
+    #print (hashed)
+    print r
     print (str(hex(h0))+ '\n' + str(hex(h1))+'\n' + str(hex(h2))+ '\n' + str(hex(h3)) )
         
 
     
+
+print(left_rotate(1, 32, 32))
 
 
 print (len ("d6aa97d33d459ea3670056e737c99a3d"))

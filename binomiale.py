@@ -19,9 +19,7 @@ class Tournoi:
         self.fils = []
     
 def Degre(T):
-    return len(T.fils)
-    
-    
+    return len(T.fils)   
     
 def EstVideTournoi(T):
     return T == None
@@ -71,21 +69,16 @@ def UFret(F1 , F2 , T):
     Renvoie la file binomiale union de deux files et d’un tournoi ."""
     if EstVideTournoi (T): #pas de tournoi en retenue
         if EstVideFile (F1 ):
-            print("aa")
             return F2
         if EstVideFile (F2 ):
-            print("bb")
             return F1
         T1 = MinDeg (F1)
         T2 = MinDeg (F2)
         if Degre (T1) < Degre (T2 ):
-            print("cc")
             return AjoutMin (T1 , UnionFile ( Reste (F1), F2 ))
         if Degre (T2) < Degre (T1 ):
-            print("dd")
             return AjoutMin (T2 , UnionFile ( Reste (F2), F1 ))
         if Degre (T1) == Degre (T2 ):
-            print("ee")
             return UFret ( Reste (F1), Reste (F2), Union2Tid (T1 ,T2 ))
 
     else:
