@@ -61,4 +61,5 @@ if __name__=='__main__':
     for message in demo:
         print(md5_to_hex(md5(message)),' <= "',message.decode('ascii'),'"', sep='')'''
 print(bitarray("salut"))
+(b"salut")
 print(md5_to_hex(md5(b"salut")))
