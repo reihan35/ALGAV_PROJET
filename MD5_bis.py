@@ -1,17 +1,3 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Dec  3 12:30:38 2018
-
-@author: 3535008
-"""
-import re
-import os
-import abr
-import MD5_bis
-folder = "Shakespeare/"
-
-
 import math
  
 rotate_amounts = [7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22,
@@ -74,26 +60,5 @@ if __name__=='__main__':
             b"12345678901234567890123456789012345678901234567890123456789012345678901234567890"]
     for message in demo:
         print(md5_to_hex(md5(message)),' <= "',message.decode('ascii'),'"', sep='')'''
- 
+print(bitarray("salut"))
 print(md5_to_hex(md5(b"salut")))
-
-
-#Q6.12
-
-a = abr.ABR()
-for f in os.listdir(folder):
-    f = open(folder + f, "r")
-    for line in f:
-    	a.insert(md5_to_hex(md5(bytearray(line.rstrip("\n\r")))))
-
-m = []
-for f in os.listdir(folder):
-    f = open(folder + f, "r")
-    for line in f:
-    	if line.rstrip("\n\r") not in m:
-    		m.append(line.rstrip("\n\r"))
-
-print(m)
-#a.print_arbre()
-
-#Q6.14

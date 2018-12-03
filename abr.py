@@ -8,10 +8,10 @@ class Noeud:
     def print_arbre(self):
         print(self.cle)
         if self.g:
-            print ("fils gauche de " + str(self.cle))
+            #print ("fils gauche de " + str(self.cle))
             self.g.print_arbre()
         if self.d:
-            print ("fils droit de " + str(self.cle))
+            #print ("fils droit de " + str(self.cle))
             self.d.print_arbre()
 
 class ABR:
@@ -28,7 +28,9 @@ class ABR:
 			self.insert_noeud(self.rac, cle)
 	
 	def insert_noeud(self, currentNoeud, cle):
-		if(cle <= currentNoeud.cle):
+		if (cle == currentNoeud.cle):
+			return
+		if(cle < currentNoeud.cle):
 			if(currentNoeud.g):
 				self.insert_noeud(currentNoeud.g, cle)
 			else:
@@ -56,7 +58,7 @@ class ABR:
 		print(self.rac)
 		if self.rac != None:
 			self.rac.print_arbre()
-
+'''
 a = ABR()
 a.insert(5)
 a.insert(7)
@@ -67,5 +69,5 @@ a.insert(36)
 a.insert(12)
 
 a.print_arbre()
-print(a.recherche(2))
+print(a.recherche(2))'''
 
