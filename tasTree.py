@@ -25,6 +25,7 @@ class Noeud:
             print ("fils droit de " + str(self.cle))
             self.d.print_arbre()
 
+    #fais remonter l'element (pour l'insertion dans un tas)
     def remonte_elem(self):
         if self.p is None:
             self         
@@ -46,7 +47,8 @@ class Noeud:
         tmp = self.cle
         self.cle = self.d.cle
         self.d.cle = tmp
-        
+    
+    #fais descendre l'element courant pour conserver la propriete de tas si les deux fils sont des tas
     def descendre_elem(self):
         if not (self.g is None):
             if not (self.d is None):
@@ -59,6 +61,8 @@ class Noeud:
                 self.switchG()
                 self.g.descendre_elem()
 
+    #transformation de l'arbre en tas en partant de la racine
+    #on descend au dernier niveau puis construction du tas par couches successives
     def make_tas(self):
         if self.g != None:
             self.g.make_tas()
@@ -75,6 +79,7 @@ class Arbre:
         self.rac = None
         self.nb_nds = 0;
         
+    #fonction qui construit un tas a partir d'une liste en 2 etapes: construit l'arbre puis le transforme en tas
     def make_tas_a(self,l):
         self.constr_arbre(l)
         self.rac.make_tas()
@@ -84,8 +89,9 @@ class Arbre:
         pere = self.rac
         #fini
         bits = deque(list(format(self.nb_nds, 'b')))
+        #on enleve le premier bit de poids fort
         bits.popleft()
-        #on vire le premier bit de poids fort
+        #on insere a la bonne place en se guidant avec la decomposition binaire
         for i in range(len(bits)-1):
             b = bits.popleft()
             if b == '0':
@@ -94,6 +100,7 @@ class Arbre:
                 pere = pere.d
          
         print("cle " + str(cle) + str(bits))
+        #si il n'y a pas encore d'elements, alors on est en train d'inserer la racine
         if self.rac is None:
             self.rac = Noeud(None, None, None, cle)
             self.rac.remonte_elem()
@@ -109,13 +116,16 @@ class Arbre:
                 pere.d.remonte_elem()
                 self.lastAjout = pere.d
     
+    #fonction couverture de constr_arbre_rec
     def constr_arbre(self, l):
         n = len(l)
         self.nb_nds = n
         self.rac = self.constr_arbre_rec(None, l, 0, n)
     
+    #construit un arbre qui n'est pas un tas, il faut ensuite le transformer en tas
     def constr_arbre_rec (self, pere, l, i, n):
         rac = Noeud(pere, None, None, l[i])
+        #On utilise les memes indices que dans le tableau, ca facilite le code
         if 2*i+1 >= n:
             rac.g = None
         else:
@@ -173,7 +183,7 @@ class Arbre:
 
 
 #a = Arbre()
-#a.constr_arbre([5, 4, 3, 2, 1])
+a.constr_arbre([5, 4, 3, 2, 1])
 #a.make_tas_a([5, 4, 3, 2, 1])
 #a.print_arbre()
 
