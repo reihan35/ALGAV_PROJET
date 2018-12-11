@@ -40,26 +40,35 @@ def md5(message):
         for i in range(64):
             f = functions[i](b, c, d)
             g = index_functions[i](i)
+            #print("f vaut " + str(f) + " g vaut " + str(g))
             to_rotate = a + f + constants[i] + int.from_bytes(chunk[4*g:4*g+4], byteorder='little')
             new_b = (b + left_rotate(to_rotate, rotate_amounts[i])) & 0xFFFFFFFF
             a, b, c, d = d, new_b, b, c
+            #print("a vaut " + str(a) + " b vaut " + str(b))
         for i, val in enumerate([a, b, c, d]):
             hash_pieces[i] += val
             hash_pieces[i] &= 0xFFFFFFFF
  
-    return sum(x<<(32*i) for i, x in enumerate(hash_pieces))
+    print (hash_pieces[0])
+    print (hash_pieces[1])
+    print (hash_pieces[2])
+    print (hash_pieces[3])
+    
+    j=1
+    cpt = 0
+    for i in hash_pieces:
+        cpt += i<<(32*j)
+        j+=1
+    print (cpt)
+    a=sum(x<<(32*i) for i, x in enumerate(hash_pieces))
+    print(a)
+    return a
  
 def md5_to_hex(digest):
     raw = digest.to_bytes(16, byteorder='little')
+    print(raw)
     return '{:032x}'.format(int.from_bytes(raw, byteorder='big'))
 
-'''
-if __name__=='__main__':
-    demo = [b"", b"a", b"abc", b"message digest", b"abcdefghijklmnopqrstuvwxyz",
-            b"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789",
-            b"12345678901234567890123456789012345678901234567890123456789012345678901234567890"]
-    for message in demo:
-        print(md5_to_hex(md5(message)),' <= "',message.decode('ascii'),'"', sep='')'''
-print(bitarray("salut"))
+
 (b"salut")
-print(md5_to_hex(md5(b"salut")))
+print(md5_to_hex(md5(b"Wikipedia, l'encyclopedie libre et gratuite")))

@@ -4,72 +4,85 @@
 Created on Mon Nov 26 11:30:32 2018
 
 @author: 3535008
+
 """
 
+# coding: encoding
+# coding: utf8
 import math
  
-rotate_amounts = [7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22,
+r= [7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22, 7, 12, 17, 22,
                   5,  9, 14, 20, 5,  9, 14, 20, 5,  9, 14, 20, 5,  9, 14, 20,
                   4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23, 4, 11, 16, 23,
                   6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21, 6, 10, 15, 21]
+
+k = [int(abs(math.sin(i+1)) * 2**32) & 0xFFFFFFFF for i in range(64)]
  
-constants = [int(abs(math.sin(i+1)) * 2**32) & 0xFFFFFFFF for i in range(64)]
- 
-init_values = [0x67452301, 0xefcdab89, 0x98badcfe, 0x10325476]
- 
-functions = 16*[lambda b, c, d: (b & c) | (~b & d)] + \
-            16*[lambda b, c, d: (d & b) | (~d & c)] + \
-            16*[lambda b, c, d: b ^ c ^ d] + \
-            16*[lambda b, c, d: c ^ (b | ~d)]
- 
-index_functions = 16*[lambda i: i] + \
-                  16*[lambda i: (5*i + 1)%16] + \
-                  16*[lambda i: (3*i + 5)%16] + \
-                  16*[lambda i: (7*i)%16]
  
 def left_rotate(x, amount):
     x &= 0xFFFFFFFF
     return ((x<<amount) | (x>>(32-amount))) & 0xFFFFFFFF
  
-def md5_(message):
- 
-    message = bytearray(message) #copy our input into a mutable buffer
+def md5(message):
+    message = bytearray(message, 'utf-8') #copy our input into a mutable buffer
     print (message)
-    orig_len_in_bits = (8 * len(message)) & 0xffffffffffffffff
+    l_msg = (8 * len(message)) & 0xffffffffffffffff
+    #ca pas totalement compris
     message.append(0x80)
     while len(message)%64 != 56:
         message.append(0)
-    message += orig_len_in_bits.to_bytes(8, byteorder='little')
+    message += l_msg.to_bytes(8, byteorder='little')
  
-    hash_pieces = init_values[:]
+    h0 = 0x67452301
+    h1 = 0xefcdab89
+    h2 = 0x98badcfe
+    h3 = 0x10325476
  
-    for chunk_ofst in range(0, len(message), 64):
-        a, b, c, d = hash_pieces
-        chunk = message[chunk_ofst:chunk_ofst+64]
+    #en octets
+    for bloc in range(0, len(message), 64):
+        
+        a = h0
+        b = h1
+        c = h2
+        d = h3
+        w = message[bloc:bloc+64]
         for i in range(64):
-            f = functions[i](b, c, d)
-            g = index_functions[i](i)
-            to_rotate = a + f + constants[i] + int.from_bytes(chunk[4*g:4*g+4], byteorder='little')
-            new_b = (b + left_rotate(to_rotate, rotate_amounts[i])) & 0xFFFFFFFF
+            if i < 16:
+                f=(b & c) | (~b & d)
+                g = i
+            elif i < 32:
+                f = (d & b) | (~d & c)
+                g = (5*i + 1)%16
+            elif i < 48:
+                f = b ^ c ^ d
+                g = (3*i + 5)%16
+            elif i < 64:
+                f = c ^ (b | ~d)
+                g = (7*i)%16
+            #print("f vaut " + str(f) + " g vaut " + str(g))
+            to_rotate = a + f + k[i] + int.from_bytes(w[4*g:4*g+4], byteorder='little')
+            new_b = (b + left_rotate(to_rotate, r[i])) & 0xFFFFFFFF
             a, b, c, d = d, new_b, b, c
-        for i, val in enumerate([a, b, c, d]):
-            hash_pieces[i] += val
-            hash_pieces[i] &= 0xFFFFFFFF
+        
+
+        h0 = (h0 + a) & 0xFFFFFFFF
+        h1 = (h1 + b) & 0xFFFFFFFF
+        h2 = (h2 + c) & 0xFFFFFFFF
+        h3 = (h3 + d) & 0xFFFFFFFF
+
+    print( h0)
+    print( h1)
+    print( h2)
+    print( h3)
+    #return h0<<32
+    
+    res=(((((h3<<32) | h2)<<32) | h1)<<32) |h0
+    raw = res.to_bytes(16, byteorder='little')
+    return hex(int.from_bytes(raw, byteorder='big'))
+    #return sum(x<<(32*i) for i, x in enumerate(hash_pieces))
  
-    return sum(x<<(32*i) for i, x in enumerate(hash_pieces))
- 
-def md5_to_hex(digest):
-    raw = digest.to_bytes(16, byteorder='little')
-    return '{:032x}'.format(int.from_bytes(raw, byteorder='big'))
- 
-
-def md5(message):
-    hashed = md5_("b"+message)
-    return md5_to_hex(hashed)
-
-print (len ("d6aa97d33d459ea3670056e737c99a3d"))
-print(md5_to_hex(md5_(b"Wikipedia, l'encyclopedie libre et gratuite")))
-print (md5("Wikipedia, l'encyclopedie libre et gratuite"))
 
 
-print(len(bin(2)))
+ #bytearray("salut", 'utf-8')
+#print (len ("d6aa97d33d459ea3670056e737c99a3d"))
+print ( md5("Wikipedia, l'encyclopedie libre et gratuite"))
