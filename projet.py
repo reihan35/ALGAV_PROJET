@@ -26,26 +26,32 @@ def eg (c1, c2):
     return c1 == c2
 
 
+#on enleve la racine et on reinsere le dernier element p
 def supprmin(tas):
     tas[0] = tas[len(tas-1)]
     del tas[len(tas-1)]
     percolateDown(0, tas);
     
+#on ajoute en fin et on fait remonter l'element pour conserver l'integrite du tas
 def ajout(tas,elem):
     tas.append(elem)
     i=len(tas)-1
     percolateUp(i, tas)
 
+#echange deux elements du tableau
 def switch(a, b, tas):
     tmp = tas[a]
     tas[a] = tas[b]
     tas[b] = tmp
     
+#fait remonter un pere(reajustement a l'insertion)
 def percolateUp(i, tas):
+    #on fait remonter le noeud tant qu'il est inferieur a son pere
     while((i-1)/2 >= 0 and tas[(i-1)/2]>tas[i]):
         switch(i, (i-1)/2, tas)
         i=(i-1)/2
 
+#Fait descendre un pere (reajustement a la construction ou a la suppression)
 def percolateDown(pere, tas):
     while 2*pere+1 < len(tas):
         #recuperer le fils minimum
@@ -71,6 +77,8 @@ def percolateDown(pere, tas):
             pere = f_d
     
 int(2.6)
+
+
 def ConsIter(l):
     tas = list(l)
     n = len(l)

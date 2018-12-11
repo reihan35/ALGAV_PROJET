@@ -16,7 +16,7 @@ class Tournoi:
     def __init__(self, cle):
         self.cle = cle
         #Les fils de la racine d'un tournoi sont des tournois
-        self.fils = []
+        self.fils = deque()
     
 def Degre(T):
     return len(T.fils)   
@@ -105,18 +105,30 @@ def ConsIter(l):
     F = deque()
     for elem in l:
         F = Ajout(F, elem)
+        print "j'ai ajoute " + str(elem)
+        print (Degre(F[0]))
         print (F)
 
     return F
 
 def SupprMin(F):
     cmin = F[0].cle
+    bmin = F[0]
     for i in range (0, len(F)):
         if F[i].cle < cmin:
             cmin = F[i].cle
-    F.remove(cmin)
+            bmin = F[i]
+    fils = Decapite(bmin)
+    print cmin
+    F.remove(bmin)
+    F = UnionFile(F, fils)
+    #print F
+    return F
 
 f = ConsIter([1, 2, 3, 4, 5, 6])
+
+f = SupprMin(f)
+print f
 print (Degre(f[0]))
 print(Degre(f[1]))
 
@@ -150,7 +162,7 @@ lt = [l1,l2,l3,l4,l5,l6,l7,l8]
 
 t_m = 0
 cpt = 1
-
+"""
 for l in lt:
 	for i in l:
 		start_time = time.time()
@@ -160,5 +172,5 @@ for l in lt:
 	file.write(str(t_m/5))
 	file.close
 	cpt = cpt + 1
-
+"""
 
