@@ -16,7 +16,8 @@ def parse_file (fic):
     for line in fic1:
         parsed.append(int(line, 16))
     return parsed
-        
+
+#Pas besoin de traitement differentiel pour les grands entiers en python
 #q1.1
 def inf(c1, c2):
     return c1 < c2
@@ -24,7 +25,6 @@ def inf(c1, c2):
 #q1.2
 def eg (c1, c2):
     return c1 == c2
-
 
 #on enleve la racine et on reinsere le dernier element p
 def supprmin(tas):
@@ -53,6 +53,7 @@ def percolateUp(i, tas):
 
 #Fait descendre un pere (reajustement a la construction ou a la suppression)
 def percolateDown(pere, tas):
+    #si la condition n'est pas verifiee, le noeud est une feuille et on peut s'arreter
     while 2*pere+1 < len(tas):
         #recuperer le fils minimum
         f_g = 2*pere+1
@@ -60,6 +61,7 @@ def percolateDown(pere, tas):
         f_d = 2*pere+2
 
         f_min = 0
+        #attention a ne pas faire de depassement d'indice
         if f_d >= len(tas):
             f_min = tas [f_g]     
         else:
@@ -75,22 +77,18 @@ def percolateDown(pere, tas):
         else:
             switch(f_d, pere, tas)
             pere = f_d
-    
-int(2.6)
 
-
+#cf. rapport pour analyse de complexite
 def ConsIter(l):
     tas = list(l)
     n = len(l)
     h = int(math.log(n, 2)) - 1
     i = int(pow(2, h)-1)
     nxt_lvl = 2*i+1
-    cpt = 0
     while h >= 0:
-        #print(h)
         #parcours d'un niveau
         while (i < nxt_lvl):
-            cpt = percolateDown(i, tas)
+            percolateDown(i, tas)
             i = i+1
         h = h - 1
         i = int(pow(2, h)-1)
@@ -98,6 +96,8 @@ def ConsIter(l):
     #print (cpt)
     return tas
 
+def Union(t1, t2):
+    return ConsIter(t1+t2)
 
 l1=['cles_alea/jeu_1_nb_cles_100.txt','cles_alea/jeu_2_nb_cles_100.txt','cles_alea/jeu_3_nb_cles_100.txt','cles_alea/jeu_4_nb_cles_100.txt','cles_alea/jeu_5_nb_cles_100.txt']
 

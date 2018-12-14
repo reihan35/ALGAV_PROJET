@@ -69,6 +69,27 @@ class Noeud:
             if self.d != None:    
                 self.d.make_tas()
             self.descendre_elem()
+
+#version legerement plus efficace
+#attention, on ne peut pas mettre une initialisation par defaut de t car sinon, il reutilise le meme tableau sur des appels successifs. bizarre?
+
+def lister_elem(nod, t,i=0):
+    if not(nod is None):
+        lister_elem(nod.g, t, i+1)
+        lister_elem(nod.d, t, i+1)
+        t.append(nod.cle)
+        if i==0:
+            #print "t vaut " + str(t)
+            return t
+
+#plus clair mais moins efficace (concatenation des listes plus couteuse)
+def lister_elemv2(nod):
+    if nod is None:
+        return []
+    a = lister_elemv2(nod.g) + lister_elemv2(nod.d)
+    a.append(nod.cle)
+    return a
+
              
                         
                     
@@ -80,7 +101,7 @@ class Arbre:
         self.nb_nds = 0;
         
     #fonction qui construit un tas a partir d'une liste en 2 etapes: construit l'arbre puis le transforme en tas
-    def make_tas_a(self,l):
+    def ConstIter(self,l):
         self.constr_arbre(l)
         self.rac.make_tas()
         
@@ -104,17 +125,14 @@ class Arbre:
         if self.rac is None:
             self.rac = Noeud(None, None, None, cle)
             self.rac.remonte_elem()
-            self.lastAjout = self.rac
         else:
             b = bits.popleft()
             if b == '0':
                 pere.g = Noeud(pere, None, None, cle)
                 pere.g.remonte_elem()
-                self.lastAjout = pere.g
             else:
                 pere.d = Noeud(pere, None, None, cle)
                 pere.d.remonte_elem()
-                self.lastAjout = pere.d
     
     #fonction couverture de constr_arbre_rec
     def constr_arbre(self, l):
@@ -124,17 +142,12 @@ class Arbre:
     
     #construit un arbre qui n'est pas un tas, il faut ensuite le transformer en tas
     def constr_arbre_rec (self, pere, l, i, n):
+        if i>= n:
+            return None
         rac = Noeud(pere, None, None, l[i])
         #On utilise les memes indices que dans le tableau, ca facilite le code
-        if 2*i+1 >= n:
-            rac.g = None
-        else:
-            rac.g = self.constr_arbre_rec(rac, l, 2*i+1, n)
-            
-            if 2*i+2 >= n:
-                rac.d = None
-            else:
-                rac.d = self.constr_arbre_rec(rac, l, 2*i+2, n)
+        rac.g = self.constr_arbre_rec(rac, l, 2*i+1, n)
+        rac.d = self.constr_arbre_rec(rac, l, 2*i+2, n)
         return rac
         
 
@@ -147,9 +160,9 @@ class Arbre:
         pere = self.rac
         cle = 0
         #fini
-        bits = deque(list(format(self.nb_nds, 'b')))
+        bits = deque(format(self.nb_nds, 'b'))
+        #on enleve le premier bit de poids fort qui ne sert pas
         bits.popleft()
-        #on vire le premier bit de poids fort
         for i in range(len(bits)-1):
             b = bits.popleft()
             if b == '0':
@@ -163,10 +176,10 @@ class Arbre:
         if b == []:
             del pere
             return
-        
         #nombre pair d'elements: le dernier element est donc un fils gauche
         if b == '0':
             cle = pere.g.cle
+            #on enleve bien le fils gauche
             del pere.g
             pere.g = None
             
@@ -176,19 +189,40 @@ class Arbre:
             del pere.d
             pere.d = None
         self.rac.cle = cle
+        #on fait descendre la nouvevlle racine pour retrouver la propriete de tas
         self.rac.descendre_elem()
         self.nb_nds = self.nb_nds - 1
          
 
+def Union(t1, t2):
+    l1 = lister_elem(t1.rac, [])
+    l2 = lister_elem(t2.rac, [])
+    l = l1+l2
+    a = Arbre()
+    a.ConstIter(l)
+    return a
 
+a = Arbre()
+a.constr_arbre(range(5))
 
-#a = Arbre()
-a.constr_arbre([5, 4, 3, 2, 1])
-#a.make_tas_a([5, 4, 3, 2, 1])
+start_time = time.time()
+print(lister_elem(a.rac, []))
+t_m = (time.time() - start_time)
+print "tm vaut " + str(t_m)
+a.ConstIter([5, 4, 3, 2, 1])
+b=Arbre()
+
+#tm vaut 0.0337061882019
+#tm vaut 0.0440330505371
+
+b.ConstIter([6 ,7, 8, 9, 10])
+#print(lister_elem(a.rac))
+c = Union(a, b)
+c.print_arbre()
 #a.print_arbre()
 
 #print("cc")
-#a.supprmin()
+a.supprmin()
 #a.print_arbre()
 """
     def traverse(self,rootnode,cle):
@@ -342,7 +376,7 @@ cpt = 1
 
 #a.constr_arbre([5, 4, 3, 2, 1])
 #a.make_tas_a([5, 4, 3, 2, 1])
-
+"""
 
 def parse_file (fic):    
     parsed = []
@@ -356,14 +390,14 @@ for l in lt:
 	for i in l:
 		start_time = time.time()
 		a = Arbre()
-		a.make_tas_a(parse_file(i))
+		a.ConstIter(parse_file(i))
 		t_m = t_m + (time.time() - start_time)
 	file = open("tas_arbre" + str(cpt) + ".txt","w") 
 	file.write(str(t_m/5))
 	file.close
 	cpt = cpt + 1
 
-
+"""
 
 #def main():
    # a = Arbre()

@@ -27,7 +27,7 @@ def md5(message):
     message = bytearray(message, 'utf-8') #copy our input into a mutable buffer
     print (message)
     l_msg = (8 * len(message)) & 0xffffffffffffffff
-    #ca pas totalement compris
+    #vrai car on a que des octets en entree
     message.append(0x80)
     while len(message)%64 != 56:
         message.append(0)
