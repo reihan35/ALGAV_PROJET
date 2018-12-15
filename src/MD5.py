@@ -25,7 +25,7 @@ def left_rotate(x, amount):
  
 def md5(message):
     message = bytearray(message, 'utf-8') #copy our input into a mutable buffer
-    print (message)
+    #print (message)
     l_msg = (8 * len(message)) & 0xffffffffffffffff
     #vrai car on a que des octets en entree
     message.append(0x80)
@@ -70,10 +70,10 @@ def md5(message):
         h2 = (h2 + c) & 0xFFFFFFFF
         h3 = (h3 + d) & 0xFFFFFFFF
 
-    print( h0)
-    print( h1)
-    print( h2)
-    print( h3)
+    #print( h0)
+    #print( h1)
+    #print( h2)
+    #print( h3)
     #return h0<<32
     
     res=(((((h3<<32) | h2)<<32) | h1)<<32) |h0

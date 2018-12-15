@@ -9,3 +9,5 @@ set term postscript
 set output "TAS.pdf"
 replot
 quit
+
+plot "const_shak.dat" using 1:2 with points title "tas", "const_shak.dat" using 1:3 with lines title "file"

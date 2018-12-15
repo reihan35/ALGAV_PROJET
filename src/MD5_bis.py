@@ -49,10 +49,10 @@ def md5(message):
             hash_pieces[i] += val
             hash_pieces[i] &= 0xFFFFFFFF
  
-    print (hash_pieces[0])
-    print (hash_pieces[1])
-    print (hash_pieces[2])
-    print (hash_pieces[3])
+    #print (hash_pieces[0])
+    #print (hash_pieces[1])
+    #print (hash_pieces[2])
+    #print (hash_pieces[3])
     
     j=1
     cpt = 0

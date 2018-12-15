@@ -28,9 +28,9 @@ def eg (c1, c2):
 
 #on enleve la racine et on reinsere le dernier element p
 def supprmin(tas):
-    tas[0] = tas[len(tas-1)]
-    del tas[len(tas-1)]
-    percolateDown(0, tas);
+    tas[0] = tas[len(tas)-1]
+    del tas[len(tas)-1]
+    percolateDown(0, tas)
     
 #on ajoute en fin et on fait remonter l'element pour conserver l'integrite du tas
 def ajout(tas,elem):
@@ -47,9 +47,9 @@ def switch(a, b, tas):
 #fait remonter un pere(reajustement a l'insertion)
 def percolateUp(i, tas):
     #on fait remonter le noeud tant qu'il est inferieur a son pere
-    while((i-1)/2 >= 0 and tas[(i-1)/2]>tas[i]):
-        switch(i, (i-1)/2, tas)
-        i=(i-1)/2
+    while((i-1)//2 >= 0 and tas[(i-1)//2]>tas[i]):
+        switch(i, (i-1)//2, tas)
+        i=(i-1)//2
 
 #Fait descendre un pere (reajustement a la construction ou a la suppression)
 def percolateDown(pere, tas):
@@ -80,7 +80,7 @@ def percolateDown(pere, tas):
 
 #cf. rapport pour analyse de complexite
 def ConsIter(l):
-    tas = list(l)
+    tas = l
     n = len(l)
     h = int(math.log(n, 2)) - 1
     i = int(pow(2, h)-1)
@@ -98,6 +98,7 @@ def ConsIter(l):
 
 def Union(t1, t2):
     return ConsIter(t1+t2)
+"""
 
 l1=['cles_alea/jeu_1_nb_cles_100.txt','cles_alea/jeu_2_nb_cles_100.txt','cles_alea/jeu_3_nb_cles_100.txt','cles_alea/jeu_4_nb_cles_100.txt','cles_alea/jeu_5_nb_cles_100.txt']
 
@@ -130,4 +131,5 @@ for l in lt:
 	file.write(str(t_m/5))
 	file.close
 	cpt = cpt + 1
+"""
 

@@ -40,9 +40,10 @@ def File(T):
     f.append(T)
     return f
 
+
 a = Tournoi(1)
 b = File(a)
-print (b)
+#print (b)
 
 def EstVideFile(F):
     return F == deque()
@@ -105,9 +106,9 @@ def ConsIter(l):
     F = deque()
     for elem in l:
         F = Ajout(F, elem)
-        print "j'ai ajoute " + str(elem)
-        print (Degre(F[0]))
-        print (F)
+        #print "j'ai ajoute " + str(elem)
+        #print (Degre(F[0]))
+        #print (F)
 
     return F
 
@@ -119,7 +120,7 @@ def SupprMin(F):
             cmin = F[i].cle
             bmin = F[i]
     fils = Decapite(bmin)
-    print cmin
+    #print cmin
     F.remove(bmin)
     F = UnionFile(F, fils)
     #print F
@@ -128,9 +129,9 @@ def SupprMin(F):
 f = ConsIter([1, 2, 3, 4, 5, 6])
 
 f = SupprMin(f)
-print f
-print (Degre(f[0]))
-print(Degre(f[1]))
+##print f
+##print (Degre(f[0]))
+##print(Degre(f[1]))
 
 
 

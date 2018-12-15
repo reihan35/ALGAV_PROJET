@@ -350,8 +350,9 @@ def main():
     #root.print_arbre()
 """
 
+"""
 
-l1=['cles_alea/jeu_1_nb_cles_100.txt','cles_alea/jeu_2_nb_cles_100.txt','cles_alea/jeu_3_nb_cles_100.txt','cles_alea/jeu_4_nb_cles_100.txt','cles_alea/jeu_5_nb_cles_100.txt']
+l1=['/cles_alea/jeu_1_nb_cles_100.txt','cles_alea/jeu_2_nb_cles_100.txt','cles_alea/jeu_3_nb_cles_100.txt','cles_alea/jeu_4_nb_cles_100.txt','cles_alea/jeu_5_nb_cles_100.txt']
 
 l2=['cles_alea/jeu_1_nb_cles_200.txt','cles_alea/jeu_2_nb_cles_200.txt','cles_alea/jeu_3_nb_cles_200.txt','cles_alea/jeu_4_nb_cles_200.txt','cles_alea/jeu_5_nb_cles_200.txt']
 
@@ -376,7 +377,7 @@ cpt = 1
 
 #a.constr_arbre([5, 4, 3, 2, 1])
 #a.make_tas_a([5, 4, 3, 2, 1])
-"""
+
 
 def parse_file (fic):    
     parsed = []
