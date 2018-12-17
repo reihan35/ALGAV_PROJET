@@ -1,9 +1,9 @@
 set terminal postscript eps enhanced
-set title "Le temps de construction d'une file binomiale"
+set title "Le temps de union pour file" 
 set ylabel "Temps d'exécution en seconde"
 set xlabel "Taille de liste"
 set style data lines
-plot "file.dat" using 1:2 with lines title "",
+plot "file_union.dat" using 1:2 with lines title "",
 set term postscript 
-set output "FILE.eps"
+set output "file_union_2.eps"
 replot 

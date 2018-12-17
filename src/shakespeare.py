@@ -74,27 +74,42 @@ start_time = time.time()
 tasTableau.ajout(tas,l[1])
 end_time = (time.time() - start_time)
 print(end_time)
-'''
+
 tas = tasTableau.ConsIter(l)
 start_time = time.time()
 tasTableau.supprmin(tas)
 end_time = (time.time() - start_time)
+
+
+tas = tasTableau.ConsIter(l)
+tas2 = tasTableau.ConsIter(l)
+start_time = time.time()
+tasTableau.Union(tas,tas2)
+end_time = (time.time() - start_time)
+
 print(end_time)
+'''
 '''
 file = binomiale.ConsIter(l)
 start_time = time.time()
 binomiale.Ajout(file,l[1])
 end_time = (time.time() - start_time)
 print(end_time)
-'''
+
 file = binomiale.ConsIter(l)
 start_time = time.time()
 binomiale.SupprMin(file)
 end_time = (time.time() - start_time)
 print(end_time)
-
 '''
-tasTableau.Union(tas)
+file = binomiale.ConsIter(l)
+file2 = binomiale.ConsIter(l)
+start_time = time.time()
+binomiale.UnionFile(file,file2)
+end_time = (time.time() - start_time)
+print(end_time)
+'''
+
 '''
 #print(m)
 #a.print_arbre()

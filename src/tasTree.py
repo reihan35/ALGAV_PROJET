@@ -208,7 +208,7 @@ a.constr_arbre(range(5))
 start_time = time.time()
 print(lister_elem(a.rac, []))
 t_m = (time.time() - start_time)
-print "tm vaut " + str(t_m)
+#print "tm vaut " + str(t_m)
 a.ConstIter([5, 4, 3, 2, 1])
 b=Arbre()
 
@@ -350,34 +350,29 @@ def main():
     #root.print_arbre()
 """
 
-"""
 
-l1=['/cles_alea/jeu_1_nb_cles_100.txt','cles_alea/jeu_2_nb_cles_100.txt','cles_alea/jeu_3_nb_cles_100.txt','cles_alea/jeu_4_nb_cles_100.txt','cles_alea/jeu_5_nb_cles_100.txt']
+l1=['../cles_alea/jeu_1_nb_cles_100.txt','../cles_alea/jeu_2_nb_cles_100.txt','../cles_alea/jeu_3_nb_cles_100.txt','../cles_alea/jeu_4_nb_cles_100.txt','../cles_alea/jeu_5_nb_cles_100.txt']
 
-l2=['cles_alea/jeu_1_nb_cles_200.txt','cles_alea/jeu_2_nb_cles_200.txt','cles_alea/jeu_3_nb_cles_200.txt','cles_alea/jeu_4_nb_cles_200.txt','cles_alea/jeu_5_nb_cles_200.txt']
+l2=['../cles_alea/jeu_1_nb_cles_200.txt','../cles_alea/jeu_2_nb_cles_200.txt','../cles_alea/jeu_3_nb_cles_200.txt','../cles_alea/jeu_4_nb_cles_200.txt','../cles_alea/jeu_5_nb_cles_200.txt']
 
-l3=['cles_alea/jeu_1_nb_cles_500.txt','cles_alea/jeu_2_nb_cles_500.txt','cles_alea/jeu_3_nb_cles_500.txt','cles_alea/jeu_4_nb_cles_500.txt','cles_alea/jeu_5_nb_cles_500.txt']
+l3=['../cles_alea/jeu_1_nb_cles_500.txt','../cles_alea/jeu_2_nb_cles_500.txt','../cles_alea/jeu_3_nb_cles_500.txt','../cles_alea/jeu_4_nb_cles_500.txt','../cles_alea/jeu_5_nb_cles_500.txt']
 
-l4=['cles_alea/jeu_1_nb_cles_1000.txt','cles_alea/jeu_2_nb_cles_1000.txt','cles_alea/jeu_3_nb_cles_1000.txt','cles_alea/jeu_4_nb_cles_1000.txt','cles_alea/jeu_5_nb_cles_1000.txt']
+l4=['../cles_alea/jeu_1_nb_cles_1000.txt','../cles_alea/jeu_2_nb_cles_1000.txt','../cles_alea/jeu_3_nb_cles_1000.txt','../cles_alea/jeu_4_nb_cles_1000.txt','../cles_alea/jeu_5_nb_cles_1000.txt']
 
 
-l5=['cles_alea/jeu_1_nb_cles_5000.txt','cles_alea/jeu_2_nb_cles_5000.txt','cles_alea/jeu_3_nb_cles_5000.txt','cles_alea/jeu_4_nb_cles_5000.txt','cles_alea/jeu_5_nb_cles_5000.txt']
+l5=['../cles_alea/jeu_1_nb_cles_5000.txt','../cles_alea/jeu_2_nb_cles_5000.txt','../cles_alea/jeu_3_nb_cles_5000.txt','../cles_alea/jeu_4_nb_cles_5000.txt','../cles_alea/jeu_5_nb_cles_5000.txt']
 
-l6=['cles_alea/jeu_1_nb_cles_10000.txt','cles_alea/jeu_2_nb_cles_10000.txt','cles_alea/jeu_3_nb_cles_10000.txt','cles_alea/jeu_4_nb_cles_10000.txt','cles_alea/jeu_5_nb_cles_10000.txt']
+l6=['../cles_alea/jeu_1_nb_cles_10000.txt','../cles_alea/jeu_2_nb_cles_10000.txt','../cles_alea/jeu_3_nb_cles_10000.txt','../cles_alea/jeu_4_nb_cles_10000.txt','../cles_alea/jeu_5_nb_cles_10000.txt']
 
-l7=['cles_alea/jeu_1_nb_cles_20000.txt','cles_alea/jeu_2_nb_cles_20000.txt','cles_alea/jeu_3_nb_cles_20000.txt','cles_alea/jeu_4_nb_cles_20000.txt','cles_alea/jeu_5_nb_cles_20000.txt']
+l7=['../cles_alea/jeu_1_nb_cles_20000.txt','../cles_alea/jeu_2_nb_cles_20000.txt','../cles_alea/jeu_3_nb_cles_20000.txt','../cles_alea/jeu_4_nb_cles_20000.txt','../cles_alea/jeu_5_nb_cles_20000.txt']
 
-l8=['cles_alea/jeu_1_nb_cles_50000.txt','cles_alea/jeu_2_nb_cles_50000.txt','cles_alea/jeu_3_nb_cles_50000.txt','cles_alea/jeu_4_nb_cles_50000.txt','cles_alea/jeu_5_nb_cles_50000.txt']
+l8=['../cles_alea/jeu_1_nb_cles_50000.txt','../cles_alea/jeu_2_nb_cles_50000.txt','../cles_alea/jeu_3_nb_cles_50000.txt','../cles_alea/jeu_4_nb_cles_50000.txt','../cles_alea/jeu_5_nb_cles_50000.txt']
 
 
 lt = [l1,l2,l3,l4,l5,l6,l7,l8]
 
 t_m = 0
 cpt = 1
-
-#a.constr_arbre([5, 4, 3, 2, 1])
-#a.make_tas_a([5, 4, 3, 2, 1])
-
 
 def parse_file (fic):    
     parsed = []
@@ -386,28 +381,38 @@ def parse_file (fic):
         parsed.append(int(line, 16))
     return parsed
 
-
+z = []
+g = []
 for l in lt:
 	for i in l:
+		print(cpt)
 		start_time = time.time()
 		a = Arbre()
 		a.ConstIter(parse_file(i))
+		z.append(a)
 		t_m = t_m + (time.time() - start_time)
-	file = open("tas_arbre" + str(cpt) + ".txt","w") 
-	file.write(str(t_m/5))
+	cpt = cpt + 1
+	g.append(z)
+	z = []
+	#file = open("tas_arbre" + str(cpt) + ".txt","w") 
+	#file.write(str(t_m/5))
+	#file.close
+	#cpt = cpt + 1
+
+t_m_1 = 0
+cpt = 1
+#file = open("tas_tab_union.txt","w")
+
+for x in g:
+	for i in range (0,5):
+	#for i in range(0,5):
+		start_time = time.time()
+		Union(x[i],x[(i+1)%5])
+		t_m_1 = t_m_1 + (time.time() - start_time)
+	#file = open("tas_tab_union" + str(cpt) + ".txt","w") 
+	file = open("tas_arbre_union" + str(cpt) + ".txt","w")	
+	file.write(str(t_m_1/5))
 	file.close
 	cpt = cpt + 1
 
-"""
 
-#def main():
-   # a = Arbre()
-   # aj_succ([9, 8, 7, 6, 5, 4, 3, 2, 1], a)
-    
-   # a.supprmin()
-   # a.print_arbre()
-   # print ("salut")
-
-
-    
-#main()
