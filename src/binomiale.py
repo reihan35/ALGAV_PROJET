@@ -177,9 +177,9 @@ for l in lt:
 	cpt = cpt + 1
 """
 
+file = open("../tests/file_constIter/file_const.dat","w") 
 
 t_m = 0
-cpt = 1
 z = []
 g = []
 for l in lt:
@@ -189,29 +189,26 @@ for l in lt:
 		t_m = t_m + (time.time() - start_time)
 	g.append(z)	
 	z = []
-	file = open("tas_tab1" + str(cpt) + ".txt","w") 
-	file.write(str(t_m/5))
-	file.close
-	cpt = cpt + 1
+	file.write("," + str(t_m/5) + "\n")
+	t_m = 0
 
+file.close()
 
-print(len(g[0]))
+file = open("../tests/file_union/file_union.dat","w") 
 
 t_m_1 = 0
 cpt = 1
-#file = open("tas_tab_union.txt","w")
+
 
 for x in g:
 	for i in range (0,5):
-	#for i in range(0,5):
 		start_time = time.time()
 		UnionFile(x[i],x[(i+1)%5])
 		t_m_1 = t_m_1 + (time.time() - start_time)
-	#file = open("tas_tab_union" + str(cpt) + ".txt","w") 
-	file = open("../tests/file_union" + str(cpt) + ".txt","w")	
-	file.write(str(t_m_1/5))
-	#file.close
-	cpt = cpt + 1
+	file.write(", " + str(t_m_1/5) + "\n")
+	t_m_1 = 0
+	
+file.close()
 
 '''
 start_time = time.time()

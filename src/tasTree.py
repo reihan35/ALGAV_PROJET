@@ -381,11 +381,15 @@ def parse_file (fic):
         parsed.append(int(line, 16))
     return parsed
 
+
+file = open("../tests/constIter_tas_tab/tas_tab.txt",'r+') 
+#file2 = open("../tests/constIter_tas_tab/tas_tab2.dat","w") 
+
+s = []
 z = []
 g = []
 for l in lt:
 	for i in l:
-		print(cpt)
 		start_time = time.time()
 		a = Arbre()
 		a.ConstIter(parse_file(i))
@@ -394,25 +398,38 @@ for l in lt:
 	cpt = cpt + 1
 	g.append(z)
 	z = []
-	#file = open("tas_arbre" + str(cpt) + ".txt","w") 
-	#file.write(str(t_m/5))
-	#file.close
-	#cpt = cpt + 1
+	s.append(str(t_m/5))
+	t_m = 0
+
+i = 0
+for line in file:
+	print(line.replace("\n",", " + str(s[i]) + "\n"))
+	i = i + 1
+
+file.close()
+
+file = open("../tests/union_tas_tab/tas_tab_union.txt",'r+') 
 
 t_m_1 = 0
 cpt = 1
-#file = open("tas_tab_union.txt","w")
+s = []
 
 for x in g:
 	for i in range (0,5):
-	#for i in range(0,5):
 		start_time = time.time()
 		Union(x[i],x[(i+1)%5])
 		t_m_1 = t_m_1 + (time.time() - start_time)
-	#file = open("tas_tab_union" + str(cpt) + ".txt","w") 
-	file = open("tas_arbre_union" + str(cpt) + ".txt","w")	
-	file.write(str(t_m_1/5))
-	file.close
+	s.append(str(t_m_1/5))
+	t_m_1= 0
 	cpt = cpt + 1
+
+
+i = 0
+for line in file:
+	print(line.replace("\n",", " + str(s[i]) + "\n"))
+	i = i + 1
+
+
+file.close()
 
 

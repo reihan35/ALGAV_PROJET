@@ -117,6 +117,7 @@ l7=['../cles_alea/jeu_1_nb_cles_20000.txt','../cles_alea/jeu_2_nb_cles_20000.txt
 l8=['../cles_alea/jeu_1_nb_cles_50000.txt','../cles_alea/jeu_2_nb_cles_50000.txt','../cles_alea/jeu_3_nb_cles_50000.txt','../cles_alea/jeu_4_nb_cles_50000.txt','../cles_alea/jeu_5_nb_cles_50000.txt']
 
 lt = [l1,l2,l3,l4,l5,l6,l7,l8]
+file = open("../tests/constIter_tas_tab/tas_tab.dat","w") 
 
 
 #TEST CONST_ITER
@@ -128,31 +129,33 @@ g = []
 for l in lt:
 	for i in l:
 		start_time = time.time()
-		z.append(ConsIter(parse_file(i)))
+		t = ConsIter(parse_file(i))
+		z.append(t)
 		t_m = t_m + (time.time() - start_time)
 	g.append(z)	
 	z = []
-	file = open("tas_tab1" + str(cpt) + ".txt","w") 
-	file.write(str(t_m/5))
-	file.close
+	file.write(str(len(t)) + ", " + str(t_m/5) + "\n")
+	t_m = 0
 	cpt = cpt + 1
 
+file.close()
 
-print(len(g[0]))
+#print(len(g[0]))
 
-t_m_1 = 0
+t_m = 0
 cpt = 1
-#file = open("tas_tab_union.txt","w")
+file = open("../tests/union_tas_tab/tas_tab_union.dat","w")
 
 for x in g:
 	for i in range (0,5):
 	#for i in range(0,5):
 		start_time = time.time()
 		Union(x[0],x[(i+1)%5])
-		t_m_1 = t_m_1 + (time.time() - start_time)
+		t_m = t_m + (time.time() - start_time)
 	#file = open("tas_tab_union" + str(cpt) + ".txt","w") 
-	file = open("tas_tab_union" + str(cpt) + ".txt","w")	
-	file.write(str(t_m_1/5))
-	file.close
+	file.write(str(len(x[0])) + ", " + str(t_m/5) + "\n")	
+	t_m = 0
 	cpt = cpt + 1
+
+file.close()
 
