@@ -19,13 +19,15 @@ folder = "../Shakespeare/"
 
 '''Q6.12'''
 
-'''
+
 a = abr.ABR()
+
+start_time = time.time()
 for f in os.listdir(folder):
     f = open(folder + f, "r")
     for line in f:
     	a.insert((MD5.md5(line.rstrip("\n\r"))))
-
+print ("Temps d'execution = " + str(time.time() - start_time))
 
 m = []
 for f in os.listdir(folder):
@@ -34,7 +36,8 @@ for f in os.listdir(folder):
     	if line.rstrip("\n\r") not in m:
     		m.append(line.rstrip("\n\r"))
 
-'''
+print("Nombre de mots dans l'oeuvre de Shakespeare: " + str(len(m)))
+
 
 '''Q6.13'''
 
