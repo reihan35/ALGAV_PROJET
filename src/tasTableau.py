@@ -102,63 +102,63 @@ def Union(t1, t2):
 t = ConsIter([3, 2, 1, 4, 0, 6])
 print (t)
 
-#l1=['../cles_alea/jeu_1_nb_cles_100.txt','../cles_alea/jeu_2_nb_cles_100.txt','../cles_alea/jeu_3_nb_cles_100.txt','../cles_alea/jeu_4_nb_cles_100.txt','../cles_alea/jeu_5_nb_cles_100.txt']
-#
-#l2=['../cles_alea/jeu_1_nb_cles_200.txt','../cles_alea/jeu_2_nb_cles_200.txt','../cles_alea/jeu_3_nb_cles_200.txt','../cles_alea/jeu_4_nb_cles_200.txt','../cles_alea/jeu_5_nb_cles_200.txt']
-#
-#l3=['../cles_alea/jeu_1_nb_cles_500.txt','../cles_alea/jeu_2_nb_cles_500.txt','../cles_alea/jeu_3_nb_cles_500.txt','../cles_alea/jeu_4_nb_cles_500.txt','../cles_alea/jeu_5_nb_cles_500.txt']
-#
-#l4=['../cles_alea/jeu_1_nb_cles_1000.txt','../cles_alea/jeu_2_nb_cles_1000.txt','../cles_alea/jeu_3_nb_cles_1000.txt','../cles_alea/jeu_4_nb_cles_1000.txt','../cles_alea/jeu_5_nb_cles_1000.txt']
-#
-#
-#l5=['../cles_alea/jeu_1_nb_cles_5000.txt','../cles_alea/jeu_2_nb_cles_5000.txt','../cles_alea/jeu_3_nb_cles_5000.txt','../cles_alea/jeu_4_nb_cles_5000.txt','../cles_alea/jeu_5_nb_cles_5000.txt']
-#
-#l6=['../cles_alea/jeu_1_nb_cles_10000.txt','../cles_alea/jeu_2_nb_cles_10000.txt','../cles_alea/jeu_3_nb_cles_10000.txt','../cles_alea/jeu_4_nb_cles_10000.txt','../cles_alea/jeu_5_nb_cles_10000.txt']
-#
-#l7=['../cles_alea/jeu_1_nb_cles_20000.txt','../cles_alea/jeu_2_nb_cles_20000.txt','../cles_alea/jeu_3_nb_cles_20000.txt','../cles_alea/jeu_4_nb_cles_20000.txt','../cles_alea/jeu_5_nb_cles_20000.txt']
-#
-#l8=['../cles_alea/jeu_1_nb_cles_50000.txt','../cles_alea/jeu_2_nb_cles_50000.txt','../cles_alea/jeu_3_nb_cles_50000.txt','../cles_alea/jeu_4_nb_cles_50000.txt','../cles_alea/jeu_5_nb_cles_50000.txt']
-#
-#lt = [l1,l2,l3,l4,l5,l6,l7,l8]
-#file = open("../tests/constIter_tas/tas_tab.dat","w") 
-#
-#
-##TEST CONST_ITER
-#
-#t_m = 0
-#cpt = 1
-#z = []
-#g = []
-#for l in lt:
-#	for i in l:
-#		start_time = time.time()
-#		t = ConsIter(parse_file(i))
-#		z.append(t)
-#		t_m = t_m + (time.time() - start_time)
-#	g.append(z)	
-#	z = []
-#	file.write(str(len(t)) + ", " + str(t_m/5) + "\n")
-#	t_m = 0
-#	cpt = cpt + 1
-#
-#file.close()
-#
-##print(len(g[0]))
-#
-#t_m = 0
-#cpt = 1
-#file = open("../tests/union_tas/tas_tab_union.dat","w")
-#
-#for x in g:
-#	for i in range (0,5):
-#	#for i in range(0,5):
-#		start_time = time.time()
-#		Union(x[0],x[(i+1)%5])
-#		t_m = t_m + (time.time() - start_time)
-#	#file = open("tas_tab_union" + str(cpt) + ".txt","w") 
-#	file.write(str(len(x[0])) + ", " + str(t_m/5) + "\n")	
-#	t_m = 0
-#	cpt = cpt + 1
-#
-#file.close()
+l1=['../cles_alea/jeu_1_nb_cles_100.txt','../cles_alea/jeu_2_nb_cles_100.txt','../cles_alea/jeu_3_nb_cles_100.txt','../cles_alea/jeu_4_nb_cles_100.txt','../cles_alea/jeu_5_nb_cles_100.txt']
+
+l2=['../cles_alea/jeu_1_nb_cles_200.txt','../cles_alea/jeu_2_nb_cles_200.txt','../cles_alea/jeu_3_nb_cles_200.txt','../cles_alea/jeu_4_nb_cles_200.txt','../cles_alea/jeu_5_nb_cles_200.txt']
+
+l3=['../cles_alea/jeu_1_nb_cles_500.txt','../cles_alea/jeu_2_nb_cles_500.txt','../cles_alea/jeu_3_nb_cles_500.txt','../cles_alea/jeu_4_nb_cles_500.txt','../cles_alea/jeu_5_nb_cles_500.txt']
+
+l4=['../cles_alea/jeu_1_nb_cles_1000.txt','../cles_alea/jeu_2_nb_cles_1000.txt','../cles_alea/jeu_3_nb_cles_1000.txt','../cles_alea/jeu_4_nb_cles_1000.txt','../cles_alea/jeu_5_nb_cles_1000.txt']
+
+
+l5=['../cles_alea/jeu_1_nb_cles_5000.txt','../cles_alea/jeu_2_nb_cles_5000.txt','../cles_alea/jeu_3_nb_cles_5000.txt','../cles_alea/jeu_4_nb_cles_5000.txt','../cles_alea/jeu_5_nb_cles_5000.txt']
+
+l6=['../cles_alea/jeu_1_nb_cles_10000.txt','../cles_alea/jeu_2_nb_cles_10000.txt','../cles_alea/jeu_3_nb_cles_10000.txt','../cles_alea/jeu_4_nb_cles_10000.txt','../cles_alea/jeu_5_nb_cles_10000.txt']
+
+l7=['../cles_alea/jeu_1_nb_cles_20000.txt','../cles_alea/jeu_2_nb_cles_20000.txt','../cles_alea/jeu_3_nb_cles_20000.txt','../cles_alea/jeu_4_nb_cles_20000.txt','../cles_alea/jeu_5_nb_cles_20000.txt']
+
+l8=['../cles_alea/jeu_1_nb_cles_50000.txt','../cles_alea/jeu_2_nb_cles_50000.txt','../cles_alea/jeu_3_nb_cles_50000.txt','../cles_alea/jeu_4_nb_cles_50000.txt','../cles_alea/jeu_5_nb_cles_50000.txt']
+
+lt = [l1,l2,l3,l4,l5,l6,l7,l8]
+file = open("../tests/constIter_tas/tas_tab.dat","w") 
+absc = [100, 200, 500, 1000, 5000, 10000, 20000, 50000]
+
+#TEST CONST_ITER
+
+t_m = 0
+cpt = 1
+z = []
+g = []
+for l in lt:
+    for i in l:
+        start_time = time.time()
+        t = ConsIter(parse_file(i))
+        z.append(t)
+        t_m = t_m + (time.time() - start_time)
+    g.append(z)    
+    z = []
+    file.write(str(len(t)) + ", " + str(t_m/5) + "\n")
+    t_m = 0
+    cpt = cpt + 1
+
+file.close()
+
+
+file = open("../tests/union_tas/tas_tab_union.dat","w")
+
+import copy
+cpt=0
+for x in g:
+    t_m = 0
+    for i in range(0,5):
+        y = copy.deepcopy(x[i])
+        z = copy.deepcopy(x[(i+1)%5])
+        start_time = time.time()
+        Union(y,z)
+        t_m = t_m + (time.time() - start_time)
+#file = open("tas_tab_union" + str(cpt) + ".txt","w") 
+    file.write(str(2*absc[cpt]) + ", " + str(t_m) + "\n")
+    cpt+=1
+
+file.close()
 #

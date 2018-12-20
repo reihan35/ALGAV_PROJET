@@ -224,131 +224,13 @@ c.print_arbre()
 #print("cc")
 a.supprmin()
 #a.print_arbre()
-"""
-    def traverse(self,rootnode,cle):
-        thislevel = [rootnode]
-        while thislevel:
-            nextlevel = list()
-            for n in thislevel:
-               # print n.value,
-                if n.g: nextlevel.append(n.g)
-                if n.d: nextlevel.append(n.d)
-                else :
-                    if n.left is None: 
-                        self.g = Noeud(self,None,None,cle)
-                        self.g.remonte_elem()
-                    else: 
-                         self.d = Noeud(self,None,None,cle)
-                         self.d.remonte_elem()
-            print
-        thislevel = nextlevel
 
-
-def traverse3(a,rootnode,cle):
-        thislevel = [rootnode]
-        while thislevel:
-            nextlevel = list()
-            for n in thislevel:
-               # print n.value,
-                if n.g: nextlevel.append(n.g)
-                if n.d: nextlevel.append(n.d)
-                else :
-                    if n.left is None: 
-                        a.g = Noeud(a,None,None,cle)
-                        a.g.remonte_elem()
-                    else: 
-                         a.d = Noeud(a,None,None,cle)
-                         a.d.remonte_elem()
-            print
-        thislevel = nextlevel
-
-    def descendre_elem(self):
-        print ("a")
-        if not (self.g is None):
-            if not (self.d is None):
-                if self.g.cle > self.d.cle:
-                    if self.d.cle < self.cle:
-                        self.switch(self.d.cle, self.cle)
-                        
-                        tmp=self.cle
-                        self.cle=self.d.cle
-                        self.d.cle=tmp
-                        
-                        self.d.descendre_elem()
-            else:
-                if self.g.cle < self.cle:
-                    self.switch(self.g.cle, self.cle)
-
-                        tmp=self.cle
-                        self.cle=self.g.cle
-                        self.g.cle=tmp
-
-                    self.g.descendre_elem()
-
-
-def traverse2(rootnode):
-  thislevel = [root2(rootnode):
-  thislevel = [rootnode]
-  while thislevel:
-    nextlevel = list()
-    for n in thislevel:
-      print n.cle,
-      if n.g: nextlevel.append(n.g)
-      if n.d: nextlevel.append(n.d)
-    printnode]
-  while thislevel:
-    nextlevel = list()
-    for n in thislevel:
-      print n.cle,
-      if n.g: nextlevel.append(n.g)
-      if n.d: nextlevel.append(n.d)
-    print
-    thislevel = nextlevel 
-"""
 print(list(format(2, 'b')))
 
 def aj_succ(tab, a):
     for el in tab:
         a.ajout(el)
 
-"""
-def main():
-    fic = "cles_alea/jeu_5_nb_cles_50000.txt"
-    content = parse_file(fic)
-    #print(content)
-    #print(len(content))
-    #print(eg(content[0], content[2]))
-    #print(inf(content[4], content[0]))
-    
-    tas = [2,5,6,10,13,8, 7]
-    tas2=ConsIter([1,5,3,0,8,2])a.ajout(8)
-    a.ajout(5)
-    a.ajout(6)
-    a.ajout(7)
-    #print(tas2)
-    
-    root = Noeud(None,None,None,7)
-    #root.traverse(,2)
-    root.ajout(19)
-    root.ajout(25)
-    root.ajout(100)
-    root.ajout(3)
-    root.ajout(1)
-    root.ajout(36)
-    root.ajout(17)
-
-    #traverse2(root)
-    
-    root.print_arbre()
-    
-    #root.remonte_elem(Noeud(3))
-    
-    #root.print_arbre()
-    #root.ajout(6)
-    
-
-    #root.print_arbre()
-"""
 
 
 l1=['../cles_alea/jeu_1_nb_cles_100.txt','../cles_alea/jeu_2_nb_cles_100.txt','../cles_alea/jeu_3_nb_cles_100.txt','../cles_alea/jeu_4_nb_cles_100.txt','../cles_alea/jeu_5_nb_cles_100.txt']
@@ -370,7 +252,7 @@ l8=['../cles_alea/jeu_1_nb_cles_50000.txt','../cles_alea/jeu_2_nb_cles_50000.txt
 
 
 lt = [l1,l2,l3,l4,l5,l6,l7,l8]
-
+absc = [100, 200, 500, 1000, 5000, 10000, 20000, 50000]
 t_m = 0
 cpt = 1
 
@@ -382,53 +264,41 @@ def parse_file (fic):
     return parsed
 
 
-file = open("../tests/constIter_tas_tab/tas_tab.txt",'r+') 
-#file2 = open("../tests/constIter_tas_tab/tas_tab2.dat","w") 
+#file = open("../tests/constIter_tas/tas_tab.txt",'r+') 
+file2 = open("../tests/constIter_tas/tas_tree.dat","w") 
 
 s = []
-z = []
 g = []
+cpt=0
 for l in lt:
-	for i in l:
-		start_time = time.time()
-		a = Arbre()
-		a.ConstIter(parse_file(i))
-		z.append(a)
-		t_m = t_m + (time.time() - start_time)
-	cpt = cpt + 1
-	g.append(z)
-	z = []
-	s.append(str(t_m/5))
-	t_m = 0
+    z = []
+    t_m = 0
+    for i in l:
+        start_time = time.time()
+        a = Arbre()
+        a.ConstIter(parse_file(i))
+        z.append(a)
+        t_m = t_m + (time.time() - start_time)
+    g.append(z)
+    file2.write(str(absc[cpt]) + ", " + str(t_m/5) + "\n")
+    cpt+=1
 
-i = 0
-for line in file:
-	print(line.replace("\n",", " + str(s[i]) + "\n"))
-	i = i + 1
 
-file.close()
+file = open("../tests/union_tas/tas_tree_union.dat","w") 
 
-file = open("../tests/union_tas_tab/tas_tab_union.txt",'r+') 
 
-t_m_1 = 0
-cpt = 1
-s = []
-
+import copy
+cpt=0
 for x in g:
-	for i in range (0,5):
-		start_time = time.time()
-		Union(x[i],x[(i+1)%5])
-		t_m_1 = t_m_1 + (time.time() - start_time)
-	s.append(str(t_m_1/5))
-	t_m_1= 0
-	cpt = cpt + 1
-
-
-i = 0
-for line in file:
-	print(line.replace("\n",", " + str(s[i]) + "\n"))
-	i = i + 1
-
+    t_m = 0
+    for i in range(0,5):
+        y = copy.deepcopy(x[i])
+        z = copy.deepcopy(x[(i+1)%5])
+        start_time = time.time()
+        Union(y,z)
+        t_m = t_m + (time.time() - start_time)
+    file.write(str(2*absc[cpt]) + ", " + str(t_m/5) + "\n")
+    cpt+=1
 
 file.close()
 

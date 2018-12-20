@@ -4,4 +4,4 @@ set title "Le temps d'exécution d'union"
 set ylabel "Temps d'exécution en seconde"
 set xlabel "Taille de liste"
 set style data lines
-plot "../union_tas/tas_union.dat" using 1:2 with lines title "tas", "file_union.dat" using 1:2 with lines title "file"
+plot "../union_tas/tas_tab_union.dat" using 1:2 with lines title "tas", "file_union.dat" using 1:2 with lines title "file"
